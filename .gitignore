@@ -1,4 +1,7 @@
 .dep.inc
 /dist
 /nbproject/private
+/nbproject/Makefile-Debug.mk
+/include
+/lib
 /build

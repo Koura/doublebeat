@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>
+#include <Box2D/Box2D.h>
 
 const int SCREEN_WIDTH = 1366;
 const int SCREEN_HEIGHT = 768;
