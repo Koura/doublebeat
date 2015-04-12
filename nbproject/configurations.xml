@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>src/utils/PropertyUtil.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +13,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>src/utils/PropertyUtil.cpp</itemPath>
+      </logicalFolder>
       <itemPath>src/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -26,6 +30,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src/utils</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -37,10 +44,13 @@
       <compileType>
         <ccTool>
           <incDir>
-            <pElem>include</pElem>
+            <pElem>../external/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
+          <linkerAddLib>
+            <pElem>../external/lib/boost</pElem>
+          </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>cygwin</linkerLibLibItem>
             <linkerLibLibItem>SDL2main</linkerLibLibItem>
@@ -50,6 +60,10 @@
         </linkerTool>
       </compileType>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils/PropertyUtil.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils/PropertyUtil.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -73,6 +87,10 @@
         </asmTool>
       </compileType>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils/PropertyUtil.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils/PropertyUtil.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
