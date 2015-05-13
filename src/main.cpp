@@ -73,11 +73,12 @@ int main(int argc, char** argv) {
         return 1;
     }
     
+    setupOpenGL(SCREEN_WIDTH, SCREEN_HEIGHT);
+    
     con = SDL_GL_CreateContext(win);
     
     SDL_GL_SetSwapInterval(1);
     
-    setupOpenGL(SCREEN_WIDTH, SCREEN_HEIGHT);
     
     SDL_Event event;
     bool done = false;
