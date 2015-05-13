@@ -37,12 +37,13 @@
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <compilerSet>default</compilerSet>
+        <compilerSet>Cygwin|Cygwin</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <ccTool>
+          <commandlineTool>g++</commandlineTool>
           <incDir>
             <pElem>../external/include</pElem>
           </incDir>
@@ -56,6 +57,8 @@
             <linkerLibLibItem>SDL2main</linkerLibLibItem>
             <linkerLibLibItem>SDL2.dll</linkerLibLibItem>
             <linkerLibLibItem>Box2D</linkerLibLibItem>
+            <linkerOptionItem>-lopengl32</linkerOptionItem>
+            <linkerOptionItem>-lglu32</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
