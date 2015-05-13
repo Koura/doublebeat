@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>src/utils/PropertyUtil.h</itemPath>
+      <itemPath>src/physics/World.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,6 +14,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="physics" displayName="physics" projectFiles="true">
+        <itemPath>src/physics/World.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
         <itemPath>src/utils/PropertyUtil.cpp</itemPath>
       </logicalFolder>
@@ -32,6 +36,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>src/utils</Elem>
+    <Elem>src/physics</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -47,6 +52,7 @@
           <incDir>
             <pElem>../external/include</pElem>
           </incDir>
+          <commandLine>-std=c++0x</commandLine>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
@@ -63,6 +69,10 @@
         </linkerTool>
       </compileType>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/physics/World.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/physics/World.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/utils/PropertyUtil.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -90,6 +100,10 @@
         </asmTool>
       </compileType>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/physics/World.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/physics/World.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/utils/PropertyUtil.cpp" ex="false" tool="1" flavor2="0">
       </item>

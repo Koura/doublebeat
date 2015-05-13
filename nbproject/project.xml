@@ -11,6 +11,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>src/utils</sourceRootElem>
+                <sourceRootElem>src/physics</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
