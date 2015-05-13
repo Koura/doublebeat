@@ -2,16 +2,22 @@
 #include "boost/property_tree/ptree.hpp"
 #include "boost/property_tree/ini_parser.hpp"
 
-std::string PropertyUtil::readValue(std::string file, std::string key)
+const std::string filename = "game.ini";
+
+std::string PropertyUtil::readValue(std::string key)
 {
     boost::property_tree::ptree pt;
    try
     {
        //
-       boost::property_tree::ini_parser::read_ini(file, pt);
+       boost::property_tree::ini_parser::read_ini(filename, pt);
     } catch (const boost::property_tree::ptree_error &e)
     {
             return "";
     }
     return pt.get<std::string>(key);
+}
+
+double PropertyUtil::readDouble(std::string key) {
+    return atof(readValue(key).c_str());
 }

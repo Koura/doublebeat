@@ -1,10 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/glu.h>
 #include <Box2D/Box2D.h>
-#include "utils/PropertyUtil.h"
+
+#include "physics/World.h"
 
 int SCREEN_WIDTH = 1366;
 int SCREEN_HEIGHT = 768;
@@ -46,6 +46,11 @@ int setWorkspaceResolution() {
     
     return 0;
 }
+    
+void reloadProperties(World* world)
+{
+    world->reInit();
+}
 
 int main(int argc, char** argv) {
     
@@ -81,20 +86,34 @@ int main(int argc, char** argv) {
     
     SDL_Event event;
     bool done = false;
+    World* world = new World();
+    world->init();
     
     while(!done) {
         SDL_PumpEvents();
         while(SDL_PollEvent(&event)) {
             switch(event.type)
             {
+                case SDL_KEYUP:
+                    switch(event.key.keysym.sym) {
+                        case SDLK_r:
+                            reloadProperties(world);
+                            break;
+                        case SDLK_s:
+                            world->jump();
+                            break;
+                    }
+                    break;
                 case SDL_QUIT:
                     done = true;
                     break;
             }
         }
+        world->step();
     }
+   
+    world->shutdown();
     SDL_DestroyWindow(win);
     SDL_Quit();
     return 0;
 }
-
