@@ -45,8 +45,6 @@ void reloadProperties(World* world) {
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
 
-
-    //    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f);
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
