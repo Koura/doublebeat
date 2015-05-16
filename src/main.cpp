@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/glu.h>
+#include <GL/glut.h>
 #include <Box2D/Box2D.h>
 
 #include "physics/World.h"
@@ -51,6 +52,7 @@ void render(SDL_Window* win, World* world) {
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     glDraw::drawSimpleTriangle(20.0f, 20.0f, 1.0f, 0.0f, 1.0f, 10.0f);
+    glDraw::drawText(100.0f, 100.0f, (char*) "Hello World");
     world->draw();
 
     SDL_GL_SwapWindow(win);
@@ -77,6 +79,7 @@ bool input(World* world) {
                 break;
             case SDL_QUIT:
                 return true;
+        
         }
     }
     return false;
