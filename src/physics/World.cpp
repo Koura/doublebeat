@@ -19,14 +19,14 @@ bool World::init()
     m_groundBodyDef.position.Set(PropertyUtil::readDouble("gravity.horizontal"), 
             PropertyUtil::readDouble("gravity.vertical"));
     m_groundBody = m_world->CreateBody(&m_groundBodyDef);
-    m_groundBox.SetAsBox(50.0f, 10.0f);
+    m_groundBox.SetAsBox(PropertyUtil::readDouble("world.width"), PropertyUtil::readDouble("world.height"));
     m_groundBody->CreateFixture(&m_groundBox, 0.0f);
     
     m_bodyDef.type = b2_dynamicBody;
     m_bodyDef.position.Set(0.0f, 4.0f);
     m_heroBody = m_world->CreateBody(&m_bodyDef);
     
-    m_dynamicBox.SetAsBox(1.0f, 1.0f);
+    m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
     m_fixtureDef.shape = &m_dynamicBox;
     m_fixtureDef.density = PropertyUtil::readDouble("hero.density");
     m_fixtureDef.friction = PropertyUtil::readDouble("hero.friction");
@@ -75,10 +75,10 @@ void World::reInit()
     m_world->SetGravity(m_gravity);
     m_groundBodyDef.position.Set(PropertyUtil::readDouble("gravity.horizontal"), 
             PropertyUtil::readDouble("gravity.vertical"));
-    m_groundBox.SetAsBox(50.0f, 10.0f);
+    m_groundBox.SetAsBox(PropertyUtil::readDouble("world.width"), PropertyUtil::readDouble("world.height"));
     m_bodyDef.position.Set(0.0f, 4.0f);
     
-    m_dynamicBox.SetAsBox(1.0f, 1.0f);
+    m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
     m_fixtureDef.shape = &m_dynamicBox;
     m_fixtureDef.density = 1.0f;
     m_fixtureDef.friction = 0.3f;

@@ -161,6 +161,7 @@ void DebugDraw::DrawString(int x, int y, const char *string, ...)
 	glLoadIdentity();
 	int w = 1366;
 	int h = 768;
+        
 	gluOrtho2D(0, w, h, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
