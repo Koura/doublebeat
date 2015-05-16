@@ -17,25 +17,19 @@ void logSDLError(std::ostream &os, const std::string &msg) {
 
 void setupOpenGL(int width, int height) {
 //    float ratio = (float) width / (float) height;
-//
-//    glShadeModel(GL_SMOOTH);
-//
-//    glCullFace(GL_BACK);
-//    glFrontFace(GL_CCW);
-//    glEnable(GL_CULL_FACE);
 
-//    glViewport(0, 0, width, height);
+    glShadeModel(GL_SMOOTH);
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
-     glOrtho( 0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, 1.0, -1.0 );
+    glOrtho( 0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, -1.0, 1.0 );
      
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     glClearColor(0, 0, 0, 0);
 
-
-//    gluPerspective(60.0, ratio, 1.0, 1024.0);
+    glEnable(GL_TEXTURE_2D);
 }
 
 void reloadProperties(World* world) {
@@ -44,12 +38,12 @@ void reloadProperties(World* world) {
 
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
-
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     glTranslatef( SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f );
-    glDraw::drawSimpleTriangle(20.0f, 20.0f, 1.0f, 0.0f, 1.0f, 10.0f);
+    glDraw::drawSimpleTriangle(50.0f, 50.0f, 1.0f, 0.0f, 1.0f, 10.0f);
     world->draw();
+
     SDL_GL_SwapWindow(win);
 }
 
@@ -97,9 +91,9 @@ int main(int argc, char** argv) {
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-//    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
-//    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
-//    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 
