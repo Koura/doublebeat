@@ -2,7 +2,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/glu.h>
-#include <GL/glut.h>
 #include <Box2D/Box2D.h>
 
 #include "physics/World.h"

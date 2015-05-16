@@ -71,7 +71,6 @@
             <linkerLibLibItem>Box2D</linkerLibLibItem>
             <linkerOptionItem>-lopengl32</linkerOptionItem>
             <linkerOptionItem>-lglu32</linkerOptionItem>
-            <linkerOptionItem>-lglut</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

@@ -22,6 +22,10 @@ glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue,
     glPopMatrix();
 }
 
+glDraw::drawSprite(float x, float y, std::string fileName) {
+    
+}
+
 glDraw::drawText(float stx, float sty, char* str) {
     float x = stx;
     float y = sty;
