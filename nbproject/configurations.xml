@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>src/utils/PropertyUtil.h</itemPath>
       <itemPath>src/physics/World.h</itemPath>
+      <itemPath>src/draw/glDraw.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -14,6 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="draw" projectFiles="true">
+        <itemPath>src/draw/glDraw.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/World.cpp</itemPath>
       </logicalFolder>
@@ -68,6 +72,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="src/draw/glDraw.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/draw/glDraw.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/physics/World.cpp" ex="false" tool="1" flavor2="0">
@@ -99,6 +107,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/draw/glDraw.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/draw/glDraw.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/physics/World.cpp" ex="false" tool="1" flavor2="0">
