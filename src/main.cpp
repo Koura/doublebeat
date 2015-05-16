@@ -22,17 +22,20 @@ void setupOpenGL(int width, int height) {
 
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
-    glEnable(GL_CULL_FACE);
-
-    glClearColor(0, 0, 0, 0);
+//    glEnable(GL_CULL_FACE);
 
     glViewport(0, 0, width, height);
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    
+    glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 1.0, -1.0);
+     
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    glClearColor(0, 0, 0, 0);
 
 
-    gluPerspective(60.0, ratio, 1.0, 1024.0);
+//    gluPerspective(60.0, ratio, 1.0, 1024.0);
 }
 
 void reloadProperties(World* world) {
@@ -41,8 +44,10 @@ void reloadProperties(World* world) {
 
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    glTranslatef( SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f );
     glDraw::drawSimpleTriangle(20.0f, 20.0f, 1.0f, 0.0f, 1.0f, 10.0f);
 
     SDL_GL_SwapWindow(win);
@@ -114,10 +119,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    setupOpenGL(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     con = SDL_GL_CreateContext(win);
 
+    setupOpenGL(SCREEN_WIDTH, SCREEN_HEIGHT);
+    
     SDL_GL_SetSwapInterval(1);
 
 
