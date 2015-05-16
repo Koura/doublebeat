@@ -18,6 +18,9 @@ public:
     void draw();
     
 private:
+    
+    void destroyFixtures();
+    
     DebugDraw debugDraw;
     
     b2World* m_world;
