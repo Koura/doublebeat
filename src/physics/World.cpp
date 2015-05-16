@@ -98,3 +98,10 @@ void World::destroyFixtures() {
         m_heroBody->DestroyFixture(f);
     }
 }
+
+position World::getHeroPosition() {
+    position retVal = {0,0};
+    retVal.x = m_heroBody->GetPosition().x;
+    retVal.y = m_heroBody->GetPosition().y;
+    return retVal;
+}
