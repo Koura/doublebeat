@@ -8,8 +8,6 @@ glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue,
 
     glPushMatrix();
 
-    glTranslatef(x, y, 0.0f);
-
     glBegin(GL_TRIANGLES);
 
     glColor4f(red, green, blue, 1);

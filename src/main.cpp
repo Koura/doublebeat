@@ -27,7 +27,7 @@ void setupOpenGL(int width, int height) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
+    glOrtho(0, SCREEN_WIDTH*0.2, 0, SCREEN_HEIGHT*0.2, -1, 1);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -45,10 +45,11 @@ void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
-    glTranslatef(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f);
+    glTranslatef(SCREEN_WIDTH / 2.f*0.2, SCREEN_HEIGHT / 2.f*0.2, 0.f);
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    glDraw::drawSimpleTriangle(20.0f, 20.0f, 1.0f, 0.0f, 1.0f, 10.0f);
+    position heroPos = world->getHeroPosition();
+    glDraw::drawSimpleTriangle(heroPos.x, heroPos.y, 1.0f, 0.0f, 1.0f, 1.6f);
     glDraw::drawText(100.0f, 100.0f, (char*) "Hello World");
     world->draw();
 

@@ -4,7 +4,10 @@
 #include "../utils/PropertyUtil.h"
 #include <Box2D/Box2D.h>
 #include <stdio.h>
-
+struct position {
+   int x;
+   int y;
+};
 class World
 {
 public:
@@ -16,6 +19,7 @@ public:
     void reInit();
     void jump();
     void draw();
+    position getHeroPosition();
     
 private:
     
