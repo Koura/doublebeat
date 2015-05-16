@@ -39,7 +39,7 @@ void reloadProperties(World* world) {
     world->reInit();
 }
 
-void render(SDL_Window *win) {
+void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
@@ -128,7 +128,7 @@ int main(int argc, char** argv) {
     while (!done) {
         done = input(world);
         update(world);
-        render(win);
+        render(win, world);
     }
 
     world->shutdown();
