@@ -1,5 +1,6 @@
 #ifndef WORLD_H
 #define	WORLD_H
+#include "../draw/DebugDraw.h"
 #include "../utils/PropertyUtil.h"
 #include <Box2D/Box2D.h>
 #include <stdio.h>
@@ -14,8 +15,11 @@ public:
     void step();
     void reInit();
     void jump();
+    void draw();
     
 private:
+    DebugDraw debugDraw;
+    
     b2World* m_world;
     b2Body* m_groundBody;
     b2Body* m_heroBody;

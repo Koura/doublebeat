@@ -37,6 +37,9 @@ bool World::init()
     velocityIterations =PropertyUtil::readDouble("world.velIter");
     positionIterations = PropertyUtil::readDouble("world.posIter");
     
+    m_world->SetDebugDraw(&debugDraw);
+    debugDraw.SetFlags(b2Draw::e_shapeBit);
+    
     return true;
 }
 
@@ -89,4 +92,8 @@ void World::jump()
 {
     float impulse = m_heroBody->GetMass() * PropertyUtil::readDouble("hero.jumppower");
     m_heroBody->ApplyLinearImpulse(b2Vec2(0,impulse), m_heroBody->GetWorldCenter(), true);
+}
+
+void World::draw() {
+    m_world->DrawDebugData();
 }
