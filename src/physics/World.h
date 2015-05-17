@@ -11,6 +11,14 @@ struct position {
     int y;
 };
 
+enum objectCategory {
+    BOUNDARY = 0x0001,
+    HERO = 0x0002,
+    FEET = 0x0004,
+    ATTACK = 0x0008,
+    ENEMY = 0x00010,
+};
+
 class World {
 public:
     World();
@@ -23,10 +31,12 @@ public:
     void draw();
     position getHeroPosition();
     void createAttackHitBox();
+    void createEnemy();
     
 private:
     void createHero();
     void destroyFixtures();
+    void destroyBodies();
 
     DebugDraw debugDraw;
     ContactListener contactListener;
@@ -35,6 +45,7 @@ private:
     b2Body* m_groundBody;
     b2Body* m_heroBody;
     b2Body* m_hitboxBody;
+    b2Body* m_enemyBody;
     
     b2Fixture* m_footSensorFixture;
     b2Fixture* m_hitbox;
@@ -49,6 +60,7 @@ private:
     int32 velocityIterations;
     int32 positionIterations;
     int attackCooldown;
+    int spawntimer;
     float32 timeStep;
 };
 

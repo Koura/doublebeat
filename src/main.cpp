@@ -50,7 +50,7 @@ void render(SDL_Window* win, World* world) {
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     glDraw::drawHPbar(-(SCREEN_WIDTH / 2.f) + 50.0f, (SCREEN_HEIGHT / 2.f)- 50.0f, 1.0f, 0.0f, 0.0f, hp * 50.0f);
-    glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
+  //  glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
     glDraw::drawText(1.0f, 1.0f, (char*) "Hello World");
     world->draw();
     

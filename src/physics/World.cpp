@@ -7,6 +7,7 @@ World::World() {
     m_groundBody = nullptr;
     m_heroBody = nullptr;
     attackCooldown = 0;
+    spawntimer = 0;
 }
 
 World::~World() {
@@ -54,6 +55,7 @@ void World::shutdown() {
         m_groundBody = nullptr;
     }
     if (m_world) {
+        destroyBodies();
         delete m_world;
         m_world = nullptr;
     }
@@ -66,6 +68,11 @@ void World::step() {
             m_world->DestroyBody(m_hitboxBody);
             m_hitboxBody = nullptr;
         }
+    }
+    if(spawntimer==0) {
+        createEnemy();
+    } else {
+        spawntimer--;
     }
     if(attackCooldown>0) {
         attackCooldown--;
@@ -116,6 +123,12 @@ void World::destroyFixtures() {
     }
 }
 
+void World::destroyBodies() {
+    for (b2Body* b = m_world->GetBodyList(); b; b = b->GetNext()) {
+        m_world->DestroyBody(b);
+    }
+}
+
 position World::getHeroPosition() {
     position retVal = {0, 0};
     retVal.x = m_heroBody->GetPosition().x;
@@ -132,12 +145,15 @@ void World::createHero() {
     m_fixtureDef.shape = &m_dynamicBox;
     m_fixtureDef.density = PropertyUtil::readDouble("hero.density");
     m_fixtureDef.friction = PropertyUtil::readDouble("hero.friction");
-
+    m_fixtureDef.filter.categoryBits = HERO;
+    m_fixtureDef.filter.maskBits = BOUNDARY | ENEMY;
     m_heroBody->CreateFixture(&m_fixtureDef);
 
     m_dynamicBox.SetAsBox(0.3, 0.3, b2Vec2(0, -PropertyUtil::readDouble("hero.height")), 0);
     m_fixtureDef.isSensor = true;
-
+    m_fixtureDef.filter.categoryBits = FEET;
+    m_fixtureDef.filter.maskBits = BOUNDARY;
+    
     m_footSensorFixture = m_heroBody->CreateFixture(&m_fixtureDef);
     m_footSensorFixture->SetUserData((void*) 1);
 }
@@ -154,4 +170,19 @@ void World::createAttackHitBox() {
         m_hitboxBody->CreateFixture(&m_fixtureDef);
         attackCooldown = 30;
     }
+}
+
+void World::createEnemy() {
+    m_bodyDef.type = b2_dynamicBody;
+    m_bodyDef.position.Set(10, -2.5);
+    m_enemyBody = m_world->CreateBody(&m_bodyDef);
+    
+    m_dynamicBox.SetAsBox(0.5,0.5);
+    m_fixtureDef.shape = &m_dynamicBox;
+    m_fixtureDef.filter.categoryBits = ENEMY;
+    m_fixtureDef.filter.maskBits = HERO;
+    m_enemyBody->CreateFixture(&m_fixtureDef);
+    m_enemyBody->SetGravityScale(0);
+    m_enemyBody->SetLinearVelocity(b2Vec2(-2,0));
+    spawntimer = 120;
 }
