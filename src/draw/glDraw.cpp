@@ -5,6 +5,7 @@
 
 #include "glDraw.h"
 
+// DrawSimpleTriangle does exactly what it says. Mainly used for testing purposes.
 glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue, float size) {
 
 
@@ -23,6 +24,8 @@ glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue,
     glPopMatrix();
 }
 
+// DrawHPbar draws a rectangular object which grows in length depending on the
+// size attribute. Mainly used to represent the player's hp bar.
 glDraw::drawHPbar(float x, float y, float red, float green, float blue, float size) {
 
     
@@ -41,7 +44,9 @@ glDraw::drawHPbar(float x, float y, float red, float green, float blue, float si
     glPopMatrix();
 }
 
-glDraw::drawSprite(float x, float y, char* fileName) {
+// DrawTexture method loads a desired image file and draws a rectangular object
+// on which the image will be added as a texture.
+glDraw::drawTexture(float x, float y, char* fileName) {
     
     GLuint gTexture;
     SDL_Surface* image = SDL_LoadBMP(fileName);
@@ -74,6 +79,9 @@ glDraw::drawSprite(float x, float y, char* fileName) {
     glPopMatrix();
 }
 
+// DrawText method takes 3 arguments: x- and y-coordinates to determine where to
+// draw the text and also the desired text to be drawn. The method draws characters
+// one at a time with points.
 glDraw::drawText(float stx, float sty, char* str) {
     float x = stx;
     float y = sty;

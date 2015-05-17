@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DoubleBeat
+PROJECTNAME=Doublebeat
 
 # Active Configuration
 DEFAULTCONF=Debug

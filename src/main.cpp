@@ -14,6 +14,7 @@ void logSDLError(std::ostream &os, const std::string &msg) {
     os << msg << "error:" << SDL_GetError() << std::endl;
 }
 
+// OpenGL initialization
 void setupOpenGL(int width, int height) {
 
     glShadeModel(GL_SMOOTH);
@@ -40,6 +41,9 @@ void reloadProperties(World* world) {
     world->reInit();
 }
 
+// The main render method. The idea is that in this method there should be GUI
+// rendering. This method also calls world->draw() which will handle all the
+// rendering concerning the entities in the world.
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -50,13 +54,14 @@ void render(SDL_Window* win, World* world) {
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     glDraw::drawHPbar(-(SCREEN_WIDTH / 2.f) + 50.0f, (SCREEN_HEIGHT / 2.f)- 50.0f, 1.0f, 0.0f, 0.0f, hp * 50.0f);
-  //  glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
+  //  glDraw::drawTexture(1.0f, 1.0f, (char*) "test.bmp");
     glDraw::drawText(1.0f, 1.0f, (char*) "Hello World");
     world->draw();
     
     SDL_GL_SwapWindow(win);
 }
 
+// Updates values and removes "dead" entities
 void update(World* world) {
     world->step();
 }
@@ -88,6 +93,8 @@ bool input(World* world) {
     return false;
 }
 
+// Takes the workspace area of your desktop and adds it as the resolution.
+// Workspace area is screen resolution minus the taskbar.
 int setWorkspaceResolution() {
     RECT *rect = new RECT();
 
@@ -102,6 +109,7 @@ int setWorkspaceResolution() {
     return 0;
 }
 
+// Frees memory when program is closed.
 void shutdown(World* world, SDL_Window* win, SDL_GLContext con) {
     world->shutdown();
 
