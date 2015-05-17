@@ -20,16 +20,7 @@ bool World::init() {
     m_groundBox.SetAsBox(PropertyUtil::readDouble("world.width"), PropertyUtil::readDouble("world.height"));
     m_groundBody->CreateFixture(&m_groundBox, 0.0f);
 
-    m_bodyDef.type = b2_dynamicBody;
-    m_bodyDef.position.Set(0.0f, 4.0f);
-    m_heroBody = m_world->CreateBody(&m_bodyDef);
-
-    m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
-    m_fixtureDef.shape = &m_dynamicBox;
-    m_fixtureDef.density = PropertyUtil::readDouble("hero.density");
-    m_fixtureDef.friction = PropertyUtil::readDouble("hero.friction");
-
-    m_heroBody->CreateFixture(&m_fixtureDef);
+    createHero();
 
     timeStep = 1.0f / 60.0f;
     velocityIterations = PropertyUtil::readDouble("world.velIter");
@@ -38,11 +29,16 @@ bool World::init() {
     m_world->SetDebugDraw(&debugDraw);
     debugDraw.SetFlags(b2Draw::e_shapeBit);
     debugDraw.setM2P(PropertyUtil::getM2P());
-    
+    m_world->SetContactListener(&contactListener);
+
     return true;
 }
 
 void World::shutdown() {
+    if (m_footSensorFixture) {
+        m_heroBody->DestroyFixture(m_footSensorFixture);
+        m_footSensorFixture = nullptr;
+    }
     if (m_heroBody) {
         m_world->DestroyBody(m_heroBody);
         m_heroBody = nullptr;
@@ -84,8 +80,10 @@ void World::reInit() {
 }
 
 void World::jump() {
-    float impulse = m_heroBody->GetMass() * PropertyUtil::readDouble("hero.jumppower");
-    m_heroBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_heroBody->GetWorldCenter(), true);
+    if (!PropertyUtil::getContacts() < 1) {
+        float impulse = m_heroBody->GetMass() * PropertyUtil::readDouble("hero.jumppower");
+        m_heroBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_heroBody->GetWorldCenter(), true);
+    }
 }
 
 void World::draw() {
@@ -103,8 +101,27 @@ void World::destroyFixtures() {
 }
 
 position World::getHeroPosition() {
-    position retVal = {0,0};
+    position retVal = {0, 0};
     retVal.x = m_heroBody->GetPosition().x;
     retVal.y = m_heroBody->GetPosition().y;
     return retVal;
+}
+
+void World::createHero() {
+    m_bodyDef.type = b2_dynamicBody;
+    m_bodyDef.position.Set(0.0f, 0.0f);
+    m_heroBody = m_world->CreateBody(&m_bodyDef);
+
+    m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
+    m_fixtureDef.shape = &m_dynamicBox;
+    m_fixtureDef.density = PropertyUtil::readDouble("hero.density");
+    m_fixtureDef.friction = PropertyUtil::readDouble("hero.friction");
+
+    m_heroBody->CreateFixture(&m_fixtureDef);
+
+    m_dynamicBox.SetAsBox(0.3, 0.3, b2Vec2(0, -PropertyUtil::readDouble("hero.height")), 0);
+    m_fixtureDef.isSensor = true;
+
+    m_footSensorFixture = m_heroBody->CreateFixture(&m_fixtureDef);
+    m_footSensorFixture->SetUserData((void*) 1);
 }

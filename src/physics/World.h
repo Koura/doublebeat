@@ -2,14 +2,16 @@
 #define	WORLD_H
 #include "../draw/DebugDraw.h"
 #include "../utils/PropertyUtil.h"
+#include "ContactListener.h"
 #include <Box2D/Box2D.h>
 #include <stdio.h>
+
 struct position {
-   int x;
-   int y;
+    int x;
+    int y;
 };
-class World
-{
+
+class World {
 public:
     World();
     ~World();
@@ -20,24 +22,26 @@ public:
     void jump();
     void draw();
     position getHeroPosition();
-    
+
 private:
-    
+    void createHero();
     void destroyFixtures();
-    
+
     DebugDraw debugDraw;
-    
+    ContactListener contactListener;
+
     b2World* m_world;
     b2Body* m_groundBody;
     b2Body* m_heroBody;
-    
+    b2Fixture* m_footSensorFixture;
+
     b2BodyDef m_groundBodyDef;
     b2PolygonShape m_groundBox;
     b2BodyDef m_bodyDef;
     b2PolygonShape m_dynamicBox;
     b2FixtureDef m_fixtureDef;
     b2Vec2 m_gravity;
-    
+
     int32 velocityIterations;
     int32 positionIterations;
     float32 timeStep;

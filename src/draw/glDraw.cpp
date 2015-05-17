@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "glDraw.h"
-#include "DebugDraw.h"
 
 glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue, float size) {
 
@@ -14,9 +13,9 @@ glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue,
     glBegin(GL_TRIANGLES);
 
     glColor4f(red, green, blue, 1);
-    glVertex2f(x*m2p, (size + y)*m2p);
-    glVertex2f((-size + x)*m2p, (-size + y)*m2p);
-    glVertex2f((size + x)*m2p, (-size + y)*m2p);
+    glVertex2f(x*m2p, (size + y) * m2p);
+    glVertex2f((-size + x) * m2p, (-size + y) * m2p);
+    glVertex2f((size + x) * m2p, (-size + y) * m2p);
 
     glEnd();
 
@@ -42,16 +41,16 @@ glDraw::drawHPbar(float x, float y, float red, float green, float blue, float si
 }
 
 glDraw::drawSprite(float x, float y, std::string fileName) {
-    
+
 }
 
 glDraw::drawText(float stx, float sty, char* str) {
     float x = stx;
     float y = sty;
     int len = strlen(str);
-    
+
     glPushMatrix();
-    
+
     glBegin(GL_POINTS);
     glColor4f(1, 1, 1, 1);
     for (int i = 0; i < len; i++) {
@@ -530,7 +529,7 @@ glDraw::drawText(float stx, float sty, char* str) {
         }
     }
     glEnd();
-    
+
     glPopMatrix();
 }
 
