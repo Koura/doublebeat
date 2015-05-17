@@ -33,7 +33,6 @@ void setupOpenGL(int width, int height) {
     glClearColor(0, 0, 0, 0);
 
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_TEXTURE_RECTANGLE_NV);
     // gluPerspective(60.0, ratio, 1.0, 1024.0);
 }
 
@@ -53,6 +52,8 @@ void render(SDL_Window* win, World* world) {
 
     glDraw::drawHPbar(heroPos.x, heroPos.y+5, 1.0f, 0.0f, 0.0f, 2.0f);
 
+    glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
+    
     glDraw::drawText(1.0f, 1.0f, (char*) "Hello World");
     world->draw();
     

@@ -1,4 +1,5 @@
 
+#include <SDL2/SDL.h>
 #include <GL/gl.h>
 #include <string.h>
 
@@ -40,12 +41,37 @@ glDraw::drawHPbar(float x, float y, float red, float green, float blue, float si
     glPopMatrix();
 }
 
-glDraw::drawSprite(float x, float y, std::string fileName) {
-
-}
-
-glDraw::loadImage(std::string fileName) {
+glDraw::drawSprite(float x, float y, char* fileName) {
     
+    GLuint gTexture;
+    SDL_Surface* image = SDL_LoadBMP(fileName);
+    
+    glGenTextures(1, &gTexture);
+    
+    glBindTexture(GL_TEXTURE_2D, gTexture);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, image->format->BytesPerPixel, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+    
+    glPushMatrix();
+    
+    glColor4f(1,1,1,1);
+    glBindTexture(GL_TEXTURE_2D, gTexture);
+    
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex2f(x, y);
+    glTexCoord2f(1, 0);
+    glVertex2f(x, y - image->clip_rect.h);
+    glTexCoord2f(1, 1);
+    glVertex2f(x + image->clip_rect.w, y - image->clip_rect.h);
+    glTexCoord2f(0, 1);
+    glVertex2f(x + image->clip_rect.w, y);
+    glEnd();
+    
+    glPopMatrix();
 }
 
 glDraw::drawText(float stx, float sty, char* str) {
