@@ -1,3 +1,4 @@
+#include <iostream>
 #include "World.h"
 
 World::World() {
@@ -69,7 +70,7 @@ void World::reInit() {
             PropertyUtil::readDouble("gravity.vertical"));
     m_groundBox.SetAsBox(PropertyUtil::readDouble("world.width"), PropertyUtil::readDouble("world.height"));
     m_groundBody->CreateFixture(&m_groundBox, 0.0f);
-
+    
     m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
     m_fixtureDef.shape = &m_dynamicBox;
     m_fixtureDef.density = 1.0f;

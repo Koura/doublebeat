@@ -3,9 +3,10 @@
 #include <string.h>
 
 #include "glDraw.h"
+#include "DebugDraw.h"
 
 glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue, float size) {
-
+   
     glPushMatrix();
 
     glBegin(GL_TRIANGLES);
@@ -14,6 +15,24 @@ glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue,
     glVertex2f(x, size + y);
     glVertex2f(-size + x, -size + y);
     glVertex2f(size + x, -size + y);
+
+    glEnd();
+
+    glPopMatrix();
+}
+
+glDraw::drawHPbar(float x, float y, float red, float green, float blue, float size) {
+
+    
+    glPushMatrix();
+
+    glBegin(GL_QUADS);
+
+    glColor4f(red, green, blue, 1);
+    glVertex2f(x, y+20);
+    glVertex2f(x+size, y+20);
+    glVertex2f(x+size, y);
+    glVertex2f(x, y);
 
     glEnd();
 

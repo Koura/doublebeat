@@ -51,8 +51,9 @@ void render(SDL_Window* win, World* world) {
     position heroPos = world->getHeroPosition();
     glDraw::drawSimpleTriangle(heroPos.x, heroPos.y, 1.0f, 0.0f, 1.0f, 1.6f);
     glDraw::drawText(100.0f, 100.0f, (char*) "Hello World");
+    glDraw::drawHPbar(heroPos.x, heroPos.y+5, 1.0f, 0.0f, 0.0f, 2.0f);
     world->draw();
-
+    
     SDL_GL_SwapWindow(win);
 }
 
