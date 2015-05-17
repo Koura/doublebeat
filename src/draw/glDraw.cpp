@@ -31,10 +31,10 @@ glDraw::drawHPbar(float x, float y, float red, float green, float blue, float si
     glBegin(GL_QUADS);
 
     glColor4f(red, green, blue, 1);
-    glVertex2f(x, y+20);
-    glVertex2f(x+size, y+20);
-    glVertex2f(x+size, y);
     glVertex2f(x, y);
+    glVertex2f(x+size, y);
+    glVertex2f(x+size, y+20);
+    glVertex2f(x, y+20);
 
     glEnd();
 
@@ -42,6 +42,10 @@ glDraw::drawHPbar(float x, float y, float red, float green, float blue, float si
 }
 
 glDraw::drawSprite(float x, float y, std::string fileName) {
+    
+}
+
+glDraw::loadImage(std::string fileName) {
     
 }
 

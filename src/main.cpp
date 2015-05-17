@@ -34,6 +34,7 @@ void setupOpenGL(int width, int height) {
     glClearColor(0, 0, 0, 0);
 
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_RECTANGLE_NV);
     // gluPerspective(60.0, ratio, 1.0, 1024.0);
 }
 
