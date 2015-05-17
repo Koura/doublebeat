@@ -42,6 +42,8 @@ void reloadProperties(World* world) {
 
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    int hp = 10;
 
     glLoadIdentity();
     glTranslatef(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f);
@@ -50,7 +52,7 @@ void render(SDL_Window* win, World* world) {
     position heroPos = world->getHeroPosition();
     glDraw::drawSimpleTriangle(heroPos.x, heroPos.y, 1.0f, 0.0f, 1.0f, 1.6f);
 
-    glDraw::drawHPbar(heroPos.x, heroPos.y+5, 1.0f, 0.0f, 0.0f, 2.0f);
+    glDraw::drawHPbar(-(SCREEN_WIDTH / 2.f) + 50.0f, (SCREEN_HEIGHT / 2.f)- 50.0f, 1.0f, 0.0f, 0.0f, hp * 50.0f);
 
     glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
     
@@ -69,7 +71,7 @@ bool input(World* world) {
     SDL_PumpEvents();
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
-            case SDL_KEYUP:
+            case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_r:
                         PropertyUtil::initValues();
