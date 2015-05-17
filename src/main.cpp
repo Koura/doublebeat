@@ -107,6 +107,14 @@ int setWorkspaceResolution() {
     return 0;
 }
 
+void shutdown(World* world, SDL_Window* win, SDL_GLContext con) {
+    world->shutdown();
+
+    SDL_GL_DeleteContext(con);
+    SDL_DestroyWindow(win);
+    SDL_Quit();
+}
+
 int main(int argc, char** argv) {
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -150,11 +158,7 @@ int main(int argc, char** argv) {
         update(world);
         render(win, world);
     }
-
-    world->shutdown();
-
-    SDL_GL_DeleteContext(con);
-    SDL_DestroyWindow(win);
-    SDL_Quit();
+    
+    shutdown(world, win, con);
     return 0;
 }
