@@ -6,15 +6,17 @@
 #include "DebugDraw.h"
 
 glDraw::drawSimpleTriangle(float x, float y, float red, float green, float blue, float size) {
-   
+
+
+    double m2p = PropertyUtil::getM2P();
     glPushMatrix();
 
     glBegin(GL_TRIANGLES);
 
     glColor4f(red, green, blue, 1);
-    glVertex2f(x, size + y);
-    glVertex2f(-size + x, -size + y);
-    glVertex2f(size + x, -size + y);
+    glVertex2f(x*m2p, (size + y)*m2p);
+    glVertex2f((-size + x)*m2p, (-size + y)*m2p);
+    glVertex2f((size + x)*m2p, (-size + y)*m2p);
 
     glEnd();
 
