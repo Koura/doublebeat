@@ -4,6 +4,9 @@
 
 const std::string filename = "game.ini";
 
+//Reads value from game.ini where key is of form X.Y
+//Here X is for example [world] in game.ini and Y is variables under this scope,
+//such as m2p
 std::string PropertyUtil::readValue(std::string key) {
     boost::property_tree::ptree pt;
     try {
@@ -15,14 +18,16 @@ std::string PropertyUtil::readValue(std::string key) {
     return pt.get<std::string>(key);
 }
 
+//Parses double value from the string value read in readValue
 double PropertyUtil::readDouble(std::string key) {
     return atof(readValue(key).c_str());
 }
 
+//initializes meters to pixels variable
 void PropertyUtil::initValues() {
     PropertyUtil::m2p = readDouble("world.m2p");
 }
-
+//get the variable that maps meters to pixels
 double PropertyUtil::getM2P() {
     return PropertyUtil::m2p;
 }
@@ -35,6 +40,7 @@ void PropertyUtil::decreaseContacts() {
     numOfFootContacts--;
 }
 
+//gets the number of contacts that hero has to boundary objects
 int PropertyUtil::getContacts() {
     return numOfFootContacts;
 }

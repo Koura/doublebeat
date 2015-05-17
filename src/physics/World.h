@@ -10,7 +10,7 @@ struct position {
     int x;
     int y;
 };
-
+//category of an object used to filter collision events
 enum objectCategory {
     BOUNDARY = 0x0001,
     HERO = 0x0002,

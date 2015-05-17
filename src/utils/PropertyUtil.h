@@ -15,8 +15,9 @@ public:
 
 private:
     static void setM2P();
-
+    //meters to pixels
     static double m2p;
+    //amount of boundary objects the hero is colliding with
     static int numOfFootContacts;
 };
 

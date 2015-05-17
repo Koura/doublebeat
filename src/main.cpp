@@ -37,6 +37,7 @@ void setupOpenGL(int width, int height) {
     // gluPerspective(60.0, ratio, 1.0, 1024.0);
 }
 
+//Calls World class to reInit objects with properties from game.ini
 void reloadProperties(World* world) {
     world->reInit();
 }
@@ -66,6 +67,7 @@ void update(World* world) {
     world->step();
 }
 
+//Handle SDL keyboard input and quit event.
 bool input(World* world) {
     SDL_Event event;
     SDL_PumpEvents();
