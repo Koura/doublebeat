@@ -36,7 +36,8 @@ bool World::init() {
 
     m_world->SetDebugDraw(&debugDraw);
     debugDraw.SetFlags(b2Draw::e_shapeBit);
-
+    debugDraw.setM2P(PropertyUtil::getM2P());
+    
     return true;
 }
 
@@ -78,6 +79,7 @@ void World::reInit() {
     timeStep = 1.0f / 60.0f;
     velocityIterations = PropertyUtil::readDouble("world.velIter");
     positionIterations = PropertyUtil::readDouble("world.posIter");
+    debugDraw.setM2P(PropertyUtil::getM2P());
 }
 
 void World::jump() {

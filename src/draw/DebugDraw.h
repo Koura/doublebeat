@@ -18,7 +18,7 @@
 
 #ifndef DEBUGDRAW_H
 #define	DEBUGDRAW_H
-
+#include<iostream>
 #include <Box2D/Box2D.h>
 
 struct b2AABB;
@@ -45,6 +45,11 @@ public:
     void DrawString(int x, int y, const char* string, ...); 
 
     void DrawAABB(b2AABB* aabb, const b2Color& color);
+    
+    void setM2P(double val);
+    
+private:
+    double m2p;
 };
 
 #endif	/* DEBUGDRAW_H */

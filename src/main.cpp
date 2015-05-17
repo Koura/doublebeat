@@ -23,14 +23,14 @@ void setupOpenGL(int width, int height) {
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
 
-    glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
+   // glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    //glLoadIdentity();
 
-    glOrtho(0, SCREEN_WIDTH*0.2, 0, SCREEN_HEIGHT*0.2, -1, 1);
+    glOrtho(0, SCREEN_WIDTH,0, SCREEN_HEIGHT, -1, 1);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    //glLoadIdentity();
     glClearColor(0, 0, 0, 0);
 
     glEnable(GL_TEXTURE_2D);
@@ -45,12 +45,12 @@ void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
-    glTranslatef(SCREEN_WIDTH / 2.f*0.2, SCREEN_HEIGHT / 2.f*0.2, 0.f);
+    glTranslatef(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f);
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     position heroPos = world->getHeroPosition();
     glDraw::drawSimpleTriangle(heroPos.x, heroPos.y, 1.0f, 0.0f, 1.0f, 1.6f);
-    glDraw::drawText(100.0f, 100.0f, (char*) "Hello World");
+    glDraw::drawText(1.0f, 1.0f, (char*) "Hello World");
     world->draw();
 
     SDL_GL_SwapWindow(win);
@@ -68,6 +68,7 @@ bool input(World* world) {
             case SDL_KEYUP:
                 switch (event.key.keysym.sym) {
                     case SDLK_r:
+                        PropertyUtil::initValues();
                         reloadProperties(world);
                         break;
                     case SDLK_s:
@@ -106,7 +107,7 @@ int main(int argc, char** argv) {
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-
+    PropertyUtil::initValues();
     if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS) == -1) {
         logSDLError(std::cout, "SDL_init");
         return 1;
