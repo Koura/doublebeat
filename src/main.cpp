@@ -3,7 +3,6 @@
 #include <SDL2/SDL_opengl.h>
 #include <GL/glu.h>
 #include <Box2D/Box2D.h>
-
 #include "physics/World.h"
 #include "draw/glDraw.h"
 
@@ -23,11 +22,11 @@ void setupOpenGL(int width, int height) {
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
 
-   // glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
+    // glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
     glMatrixMode(GL_PROJECTION);
     //glLoadIdentity();
 
-    glOrtho(0, SCREEN_WIDTH,0, SCREEN_HEIGHT, -1, 1);
+    glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
 
     glMatrixMode(GL_MODELVIEW);
     //glLoadIdentity();
@@ -82,7 +81,7 @@ bool input(World* world) {
                 break;
             case SDL_QUIT:
                 return true;
-        
+
         }
     }
     return false;

@@ -27,4 +27,17 @@ double PropertyUtil::getM2P() {
     return PropertyUtil::m2p;
 }
 
+void PropertyUtil::incrementContacts() {
+    numOfFootContacts++;
+}
+
+void PropertyUtil::decreaseContacts() {
+    numOfFootContacts--;
+}
+
+int PropertyUtil::getContacts() {
+    return numOfFootContacts;
+}
+
 double PropertyUtil::m2p = 1;
+int PropertyUtil::numOfFootContacts = 0;

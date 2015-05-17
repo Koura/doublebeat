@@ -12,7 +12,7 @@ public:
     static loadImage(std::string fileName);
     static drawHPbar(float x, float y, float red, float green, float blue, float size);
 private:
-    
+
 };
 
 #endif	
