@@ -22,7 +22,8 @@ public:
     void jump();
     void draw();
     position getHeroPosition();
-
+    void createAttackHitBox();
+    
 private:
     void createHero();
     void destroyFixtures();
@@ -33,8 +34,11 @@ private:
     b2World* m_world;
     b2Body* m_groundBody;
     b2Body* m_heroBody;
+    b2Body* m_hitboxBody;
+    
     b2Fixture* m_footSensorFixture;
-
+    b2Fixture* m_hitbox;
+    
     b2BodyDef m_groundBodyDef;
     b2PolygonShape m_groundBox;
     b2BodyDef m_bodyDef;
@@ -44,6 +48,7 @@ private:
 
     int32 velocityIterations;
     int32 positionIterations;
+    int attackCooldown;
     float32 timeStep;
 };
 

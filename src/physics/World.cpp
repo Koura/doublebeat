@@ -5,6 +5,7 @@ World::World() {
     m_world = nullptr;
     m_groundBody = nullptr;
     m_heroBody = nullptr;
+    attackCooldown = 0;
 }
 
 World::~World() {
@@ -35,6 +36,10 @@ bool World::init() {
 }
 
 void World::shutdown() {
+    if (m_hitboxBody) {
+        m_world->DestroyBody(m_hitboxBody);
+        m_hitboxBody = nullptr;
+    }
     if (m_footSensorFixture) {
         m_heroBody->DestroyFixture(m_footSensorFixture);
         m_footSensorFixture = nullptr;
@@ -55,6 +60,15 @@ void World::shutdown() {
 
 void World::step() {
     m_world->Step(timeStep, velocityIterations, positionIterations);
+    if(attackCooldown == 0) {
+        if(m_hitboxBody) {
+            m_world->DestroyBody(m_hitboxBody);
+            m_hitboxBody = nullptr;
+        }
+    }
+    if(attackCooldown>0) {
+        attackCooldown--;
+    }
     //printf("%4.2f %4.2f %4.2f\n", m_heroBody->GetPosition().x,  m_heroBody->GetPosition().y,  m_heroBody->GetAngle());
 }
 
@@ -67,7 +81,7 @@ void World::reInit() {
             PropertyUtil::readDouble("gravity.vertical"));
     m_groundBox.SetAsBox(PropertyUtil::readDouble("world.width"), PropertyUtil::readDouble("world.height"));
     m_groundBody->CreateFixture(&m_groundBox, 0.0f);
-    
+
     m_dynamicBox.SetAsBox(PropertyUtil::readDouble("hero.width"), PropertyUtil::readDouble("hero.height"));
     m_fixtureDef.shape = &m_dynamicBox;
     m_fixtureDef.density = 1.0f;
@@ -124,4 +138,18 @@ void World::createHero() {
 
     m_footSensorFixture = m_heroBody->CreateFixture(&m_fixtureDef);
     m_footSensorFixture->SetUserData((void*) 1);
+}
+
+void World::createAttackHitBox() {
+    if (attackCooldown == 0 && !m_hitboxBody) {
+        m_bodyDef.type = b2_staticBody;
+        m_bodyDef.position.Set(m_heroBody->GetWorldCenter().x + 1, m_heroBody->GetWorldCenter().y + 0.5);
+        m_hitboxBody = m_world->CreateBody(&m_bodyDef);
+
+        m_dynamicBox.SetAsBox(1, 0.3);
+        m_fixtureDef.shape = &m_dynamicBox;
+
+        m_hitboxBody->CreateFixture(&m_fixtureDef);
+        attackCooldown = 30;
+    }
 }

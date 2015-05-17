@@ -78,6 +78,9 @@ bool input(World* world) {
                     case SDLK_s:
                         world->jump();
                         break;
+                    case SDLK_a:
+                        world->createAttackHitBox();
+                        break;
                 }
                 break;
             case SDL_QUIT:
