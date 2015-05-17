@@ -42,20 +42,15 @@ void reloadProperties(World* world) {
 
 void render(SDL_Window* win, World* world) {
     glClear(GL_COLOR_BUFFER_BIT);
-    
-    int hp = 10;
 
+    int hp = 10;
+    
     glLoadIdentity();
     glTranslatef(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f, 0.f);
     glViewport(0.f, 0.f, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    position heroPos = world->getHeroPosition();
-    glDraw::drawSimpleTriangle(heroPos.x, heroPos.y, 1.0f, 0.0f, 1.0f, 1.6f);
-
     glDraw::drawHPbar(-(SCREEN_WIDTH / 2.f) + 50.0f, (SCREEN_HEIGHT / 2.f)- 50.0f, 1.0f, 0.0f, 0.0f, hp * 50.0f);
-
     glDraw::drawSprite(1.0f, 1.0f, (char*) "test.bmp");
-    
     glDraw::drawText(1.0f, 1.0f, (char*) "Hello World");
     world->draw();
     

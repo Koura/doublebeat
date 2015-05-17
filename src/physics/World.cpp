@@ -1,5 +1,6 @@
 #include <iostream>
 #include "World.h"
+#include "../draw/glDraw.h"
 
 World::World() {
     m_world = nullptr;
@@ -101,6 +102,7 @@ void World::jump() {
 }
 
 void World::draw() {
+    glDraw::drawSimpleTriangle(m_heroBody->GetPosition().x, m_heroBody->GetPosition().y, 1.0f, 0.0f, 1.0f, 1.6f);
     m_world->DrawDebugData();
 }
 
